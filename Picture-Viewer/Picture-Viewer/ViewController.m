@@ -46,6 +46,7 @@
     if(_topLabel==nil){
         _topLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 20)];
         _topLabel.textAlignment=NSTextAlignmentCenter;
+       _topLabel.text=@"1/5";
         [self.view addSubview:_topLabel];
     }
     return _topLabel;
@@ -58,6 +59,8 @@
         CGFloat imageViewX=(self.view.bounds.size.width-imageViewW)*0.5;
         CGFloat imageViewY=CGRectGetMaxY(_topLabel.frame);
         _imageView=[[UIImageView alloc]initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
+        UIImage* image=[UIImage imageNamed:@"biaoqingdi"];
+        _imageView.image=image;
         [self.view addSubview:_imageView];
     }
     return _imageView;
@@ -66,6 +69,7 @@
 -(UILabel*)detailLabel{
     if (_detailLabel==nil) {
         _detailLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.view.bounds.size.width, 20)];
+        _detailLabel.text=@"表情帝";
         _detailLabel.textAlignment=NSTextAlignmentCenter;
         [self.view addSubview:_detailLabel];
     }
@@ -81,6 +85,7 @@
         _leftButton.enabled=NO;
         [_leftButton setImage:[UIImage imageNamed:@"left_normal"] forState:UIControlStateNormal];
         [_leftButton setImage:[UIImage imageNamed:@"left_highlighted"] forState:UIControlStateHighlighted];
+        [_leftButton addTarget:self action:@selector(prePhoto) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_leftButton];
     }
     return _leftButton;
@@ -93,6 +98,7 @@
         _rightButton.center=CGPointMake((CGRectGetMaxX(self.imageView.frame)+self.view.bounds.size.width)/2, centerY);
         [_rightButton setImage:[UIImage imageNamed:@"right_normal"] forState:UIControlStateNormal];
         [_rightButton setImage:[UIImage imageNamed:@"right_highlighted"] forState:UIControlStateHighlighted];
+        [_rightButton addTarget:self action:@selector(nextPhoto) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_rightButton];
     }
     return _rightButton;
