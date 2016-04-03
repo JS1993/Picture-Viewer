@@ -15,12 +15,14 @@
 @property(nonatomic,strong)UIButton* rightButton;
 @property(nonatomic,strong)UILabel* detailLabel;
 @property(nonatomic)int index;
+@property(nonatomic,strong)NSArray* array;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self produceDictionaryAndArray];
     //创建顶部标签
     self.topLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 20)];
     self.topLabel.text=@"1/5";
@@ -69,40 +71,21 @@
     [self estimate];
 }
 -(void)estimate{
-    //    if (self.index==4) {
-    //        self.rightButton.enabled=NO;
-    //    }else{
-    //        self.rightButton.enabled=YES;
-    //    }
     self.rightButton.enabled=(self.index!=4);
     self.leftButton.enabled=(self.index!=0);
 }
+-(void)produceDictionaryAndArray{
+    NSDictionary* dict1=@{@"name":@"biaoqingdi",@"desc":@"表情帝"};
+    NSDictionary* dict2=@{@"name":@"bingli",@"desc":@"病历"};
+    NSDictionary* dict3=@{@"name":@"chiniupa",@"desc":@"吃牛扒"};
+    NSDictionary* dict4=@{@"name":@"danteng",@"desc":@"蛋疼"};
+    NSDictionary* dict5=@{@"name":@"wangba",@"desc":@"王八"};
+    self.array=@[dict1,dict2,dict3,dict4,dict5];
+}
 -(void)choosePhoto{
+    self.imageView.image=[UIImage imageNamed:self.array[self.index][@"name"]];
+    self.detailLabel.text=self.array[self.index][@"desc"];
     self.topLabel.text=[NSString stringWithFormat:@"%d/%d",self.index+1,5];
-    switch (self.index) {
-        case 0:
-            self.imageView.image=[UIImage imageNamed:@"biaoqingdi"];
-            self.detailLabel.text=@"表情帝";
-            break;
-        case 1:
-            self.imageView.image=[UIImage imageNamed:@"bingli"];
-            self.detailLabel.text=@"病历";
-            break;
-        case 2:
-            self.imageView.image=[UIImage imageNamed:@"chiniupa"];
-            self.detailLabel.text=@"吃牛扒";
-            break;
-        case 3:
-            self.imageView.image=[UIImage imageNamed:@"danteng"];
-            self.detailLabel.text=@"蛋疼";
-            break;
-        case 4:
-            self.imageView.image=[UIImage imageNamed:@"wangba"];
-            self.detailLabel.text=@"王八";
-            break;
-        default:
-            break;
-    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
