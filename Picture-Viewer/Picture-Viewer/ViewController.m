@@ -19,51 +19,83 @@
 @end
 
 @implementation ViewController
-//懒加载
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //设置顶部标签
+    self.topLabel.text=@"1/5";
+    //设置图片
+    UIImage* image=[UIImage imageNamed:@"biaoqingdi"];
+    self.imageView.image=image;
+    //设置底部描述性文字
+    self.detailLabel.text=@"表情帝";
+    //设置左边按钮
+    [self.leftButton addTarget:self action:@selector(prePhoto) forControlEvents:UIControlEventTouchUpInside];
+    //设置右边按钮
+    [self.rightButton addTarget:self action:@selector(nextPhoto) forControlEvents:UIControlEventTouchUpInside];
+}
+//数组数据的懒加载
 -(NSArray*)array{
     if (_array==nil) {
         _array=[NSArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"imageList" ofType:@"plist"]];
     }
     return _array;
 }
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    //创建顶部标签
-    self.topLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 20)];
-    self.topLabel.text=@"1/5";
-    self.topLabel.textAlignment=NSTextAlignmentCenter;
-    [self.view addSubview:self.topLabel];
-    //创建图片
-    CGFloat imageViewW=200;
-    CGFloat imageViewH=200;
-    CGFloat imageViewX=(self.view.bounds.size.width-imageViewW)*0.5;
-    CGFloat imageViewY=CGRectGetMaxY(_topLabel.frame);
-    self.imageView=[[UIImageView alloc]initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
-    UIImage* image=[UIImage imageNamed:@"biaoqingdi"];
-    self.imageView.image=image;
-    [self.view addSubview:self.imageView];
-    //创建底部描述性文字
-    self.detailLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.view.bounds.size.width, 20)];
-    self.detailLabel.text=@"表情帝";
-    self.detailLabel.textAlignment=NSTextAlignmentCenter;
-    [self.view addSubview:self.detailLabel];
-    //创建左边按钮
-    self.leftButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    CGFloat centerY=self.imageView.center.y;
-    CGFloat centerX=self.imageView.frame.origin.x*0.5;
-    self.leftButton.center=CGPointMake(centerX, centerY);
-    [self.leftButton setImage:[UIImage imageNamed:@"left_normal"] forState:UIControlStateNormal];
-    [self.leftButton setImage:[UIImage imageNamed:@"left_highlighted"] forState:UIControlStateHighlighted];
-    [self.leftButton addTarget:self action:@selector(prePhoto) forControlEvents:UIControlEventTouchUpInside];
-    self.leftButton.enabled=NO;
-    [self.view addSubview:self.leftButton];
-    //创建右边按钮
-    self.rightButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    self.rightButton.center=CGPointMake((CGRectGetMaxX(self.imageView.frame)+self.view.bounds.size.width)/2, centerY);
-    [self.rightButton setImage:[UIImage imageNamed:@"right_normal"] forState:UIControlStateNormal];
-    [self.rightButton setImage:[UIImage imageNamed:@"right_highlighted"] forState:UIControlStateHighlighted];
-    [self.rightButton addTarget:self action:@selector(nextPhoto) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.rightButton];
+//顶部标签的懒加载
+-(UILabel*)topLabel{
+    if(_topLabel==nil){
+        _topLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 20)];
+        _topLabel.textAlignment=NSTextAlignmentCenter;
+        [self.view addSubview:_topLabel];
+    }
+    return _topLabel;
+}
+//图片的懒加载
+-(UIImageView*)imageView{
+    if (_imageView==nil) {
+        CGFloat imageViewW=200;
+        CGFloat imageViewH=200;
+        CGFloat imageViewX=(self.view.bounds.size.width-imageViewW)*0.5;
+        CGFloat imageViewY=CGRectGetMaxY(_topLabel.frame);
+        _imageView=[[UIImageView alloc]initWithFrame:CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH)];
+        [self.view addSubview:_imageView];
+    }
+    return _imageView;
+}
+//底部描述性文字的懒加载
+-(UILabel*)detailLabel{
+    if (_detailLabel==nil) {
+        _detailLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.imageView.frame), self.view.bounds.size.width, 20)];
+        _detailLabel.textAlignment=NSTextAlignmentCenter;
+        [self.view addSubview:_detailLabel];
+    }
+    return _detailLabel;
+}
+//左边按钮的懒加载
+-(UIButton *)leftButton{
+    if (_leftButton==nil) {
+        _leftButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
+        CGFloat centerY=self.imageView.center.y;
+        CGFloat centerX=self.imageView.frame.origin.x*0.5;
+        _leftButton.center=CGPointMake(centerX, centerY);
+        _leftButton.enabled=NO;
+        [_leftButton setImage:[UIImage imageNamed:@"left_normal"] forState:UIControlStateNormal];
+        [_leftButton setImage:[UIImage imageNamed:@"left_highlighted"] forState:UIControlStateHighlighted];
+        [self.view addSubview:_leftButton];
+    }
+    return _leftButton;
+}
+//右边按钮的懒加载
+-(UIButton *)rightButton{
+    if (_rightButton==nil) {
+       CGFloat centerY=self.imageView.center.y;
+        _rightButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
+        _rightButton.center=CGPointMake((CGRectGetMaxX(self.imageView.frame)+self.view.bounds.size.width)/2, centerY);
+        [_rightButton setImage:[UIImage imageNamed:@"right_normal"] forState:UIControlStateNormal];
+        [_rightButton setImage:[UIImage imageNamed:@"right_highlighted"] forState:UIControlStateHighlighted];
+        [self.view addSubview:_rightButton];
+    }
+    return _rightButton;
 }
 -(void)prePhoto{
     self.index--;
@@ -83,10 +115,6 @@
     self.imageView.image=[UIImage imageNamed:self.array[self.index][@"name"]];
     self.detailLabel.text=self.array[self.index][@"desc"];
     self.topLabel.text=[NSString stringWithFormat:@"%d/%d",self.index+1,5];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
