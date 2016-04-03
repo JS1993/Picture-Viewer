@@ -22,12 +22,7 @@
 //懒加载
 -(NSArray*)array{
     if (_array==nil) {
-        NSDictionary* dict1=@{@"name":@"biaoqingdi",@"desc":@"表情帝"};
-        NSDictionary* dict2=@{@"name":@"bingli",@"desc":@"病历"};
-        NSDictionary* dict3=@{@"name":@"chiniupa",@"desc":@"吃牛扒"};
-        NSDictionary* dict4=@{@"name":@"danteng",@"desc":@"蛋疼"};
-        NSDictionary* dict5=@{@"name":@"wangba",@"desc":@"王八"};
-        _array=@[dict1,dict2,dict3,dict4,dict5];
+        _array=[NSArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"imageList" ofType:@"plist"]];
     }
     return _array;
 }

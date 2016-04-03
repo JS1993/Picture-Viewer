@@ -41,6 +41,7 @@
 		CF90F10F1CB0BF9D001A934A /* plus_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = CF90F0FB1CB0BF9D001A934A /* plus_normal.png */; };
 		CF90F1101CB0BF9D001A934A /* right_rotate_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = CF90F0FC1CB0BF9D001A934A /* right_rotate_highlighted.png */; };
 		CF90F1111CB0BF9D001A934A /* right_rotate_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = CF90F0FD1CB0BF9D001A934A /* right_rotate_normal.png */; };
+		CF90F1131CB0ED7C001A934A /* imageList.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF90F1121CB0ED7C001A934A /* imageList.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		CF90F0FB1CB0BF9D001A934A /* plus_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_normal.png; sourceTree = "<group>"; };
 		CF90F0FC1CB0BF9D001A934A /* right_rotate_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_rotate_highlighted.png; sourceTree = "<group>"; };
 		CF90F0FD1CB0BF9D001A934A /* right_rotate_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_rotate_normal.png; sourceTree = "<group>"; };
+		CF90F1121CB0ED7C001A934A /* imageList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = imageList.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				CF90F0B51CB0BD41001A934A /* Assets.xcassets */,
 				CF90F0B71CB0BD41001A934A /* LaunchScreen.storyboard */,
 				CF90F0BA1CB0BD41001A934A /* Info.plist */,
+				CF90F1121CB0ED7C001A934A /* imageList.plist */,
 				CF90F0B21CB0BD41001A934A /* Picture_Viewer.xcdatamodeld */,
 				CF90F0A61CB0BD41001A934A /* Supporting Files */,
 			);
@@ -371,6 +374,7 @@
 				CF90F1111CB0BF9D001A934A /* right_rotate_normal.png in Resources */,
 				CF90F1071CB0BF9D001A934A /* top_disable.png in Resources */,
 				CF90F0B61CB0BD41001A934A /* Assets.xcassets in Resources */,
+				CF90F1131CB0ED7C001A934A /* imageList.plist in Resources */,
 				CF90F1051CB0BF9D001A934A /* right_highlighted.png in Resources */,
 				CF90F0FE1CB0BF9D001A934A /* bottom_disable.png in Resources */,
 				CF90F1001CB0BF9D001A934A /* bottom_normal.png in Resources */,
