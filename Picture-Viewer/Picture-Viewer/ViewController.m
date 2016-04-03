@@ -19,10 +19,20 @@
 @end
 
 @implementation ViewController
-
+//懒加载
+-(NSArray*)array{
+    if (_array==nil) {
+        NSDictionary* dict1=@{@"name":@"biaoqingdi",@"desc":@"表情帝"};
+        NSDictionary* dict2=@{@"name":@"bingli",@"desc":@"病历"};
+        NSDictionary* dict3=@{@"name":@"chiniupa",@"desc":@"吃牛扒"};
+        NSDictionary* dict4=@{@"name":@"danteng",@"desc":@"蛋疼"};
+        NSDictionary* dict5=@{@"name":@"wangba",@"desc":@"王八"};
+        _array=@[dict1,dict2,dict3,dict4,dict5];
+    }
+    return _array;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self produceDictionaryAndArray];
     //创建顶部标签
     self.topLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 20)];
     self.topLabel.text=@"1/5";
@@ -73,14 +83,6 @@
 -(void)estimate{
     self.rightButton.enabled=(self.index!=4);
     self.leftButton.enabled=(self.index!=0);
-}
--(void)produceDictionaryAndArray{
-    NSDictionary* dict1=@{@"name":@"biaoqingdi",@"desc":@"表情帝"};
-    NSDictionary* dict2=@{@"name":@"bingli",@"desc":@"病历"};
-    NSDictionary* dict3=@{@"name":@"chiniupa",@"desc":@"吃牛扒"};
-    NSDictionary* dict4=@{@"name":@"danteng",@"desc":@"蛋疼"};
-    NSDictionary* dict5=@{@"name":@"wangba",@"desc":@"王八"};
-    self.array=@[dict1,dict2,dict3,dict4,dict5];
 }
 -(void)choosePhoto{
     self.imageView.image=[UIImage imageNamed:self.array[self.index][@"name"]];
