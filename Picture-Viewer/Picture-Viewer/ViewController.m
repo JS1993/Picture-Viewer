@@ -59,24 +59,23 @@
     [self.view addSubview:self.rightButton];
 }
 -(void)prePhoto{
-    self.rightButton.enabled=YES;
     self.index--;
     [self choosePhoto];
-    if(self.index==0){
-        self.leftButton.enabled=NO;
-    }else{
-        self.leftButton.enabled=YES;
-    }
+    [self estimate];
 }
 -(void)nextPhoto{
-    self.leftButton.enabled=YES;
     self.index++;
     [self choosePhoto];
-    if (self.index==4) {
-        self.rightButton.enabled=NO;
-    }else{
-        self.rightButton.enabled=YES;
-    }
+    [self estimate];
+}
+-(void)estimate{
+    //    if (self.index==4) {
+    //        self.rightButton.enabled=NO;
+    //    }else{
+    //        self.rightButton.enabled=YES;
+    //    }
+    self.rightButton.enabled=(self.index!=4);
+    self.leftButton.enabled=(self.index!=0);
 }
 -(void)choosePhoto{
     self.topLabel.text=[NSString stringWithFormat:@"%d/%d",self.index+1,5];
