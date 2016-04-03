@@ -59,32 +59,9 @@
     [self.view addSubview:self.rightButton];
 }
 -(void)prePhoto{
-        self.rightButton.enabled=YES;
-        self.index--;
-        self.topLabel.text=[NSString stringWithFormat:@"%d/%d",self.index+1,5];
-        switch (self.index) {
-        case 0:
-            self.imageView.image=[UIImage imageNamed:@"biaoqingdi"];
-            self.detailLabel.text=@"表情帝";
-            break;
-        case 1:
-            self.imageView.image=[UIImage imageNamed:@"bingli"];
-            self.detailLabel.text=@"病历";
-            break;
-        case 2:
-            self.imageView.image=[UIImage imageNamed:@"chiniupa"];
-            self.detailLabel.text=@"吃牛扒";
-            break;
-        case 3:
-            self.imageView.image=[UIImage imageNamed:@"danteng"];
-            self.detailLabel.text=@"蛋疼";
-            break;
-        case 4:
-            self.imageView.image=[UIImage imageNamed:@"wangba"];
-            self.detailLabel.text=@"王八";
-            break;
-        default:break;
-       }
+    self.rightButton.enabled=YES;
+    self.index--;
+    [self choosePhoto];
     if(self.index==0){
         self.leftButton.enabled=NO;
     }else{
@@ -92,10 +69,18 @@
     }
 }
 -(void)nextPhoto{
-        self.index++;
-        self.leftButton.enabled=YES;
-        self.topLabel.text=[NSString stringWithFormat:@"%d/%d",self.index+1,5];
-        switch (self.index) {
+    self.leftButton.enabled=YES;
+    self.index++;
+    [self choosePhoto];
+    if (self.index==4) {
+        self.rightButton.enabled=NO;
+    }else{
+        self.rightButton.enabled=YES;
+    }
+}
+-(void)choosePhoto{
+    self.topLabel.text=[NSString stringWithFormat:@"%d/%d",self.index+1,5];
+    switch (self.index) {
         case 0:
             self.imageView.image=[UIImage imageNamed:@"biaoqingdi"];
             self.detailLabel.text=@"表情帝";
@@ -118,11 +103,6 @@
             break;
         default:
             break;
-        }
-    if (self.index==4) {
-        self.rightButton.enabled=NO;
-    }else{
-        self.rightButton.enabled=YES;
     }
 }
 - (void)didReceiveMemoryWarning {
