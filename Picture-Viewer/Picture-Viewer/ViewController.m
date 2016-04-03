@@ -14,6 +14,7 @@
 @property(nonatomic,strong)UIButton* leftButton;
 @property(nonatomic,strong)UIButton* rightButton;
 @property(nonatomic,strong)UILabel* detailLabel;
+@property(nonatomic)int index;
 @end
 
 @implementation ViewController
@@ -46,15 +47,84 @@
     self.leftButton.center=CGPointMake(centerX, centerY);
     [self.leftButton setImage:[UIImage imageNamed:@"left_normal"] forState:UIControlStateNormal];
     [self.leftButton setImage:[UIImage imageNamed:@"left_highlighted"] forState:UIControlStateHighlighted];
+    [self.leftButton addTarget:self action:@selector(prePhoto) forControlEvents:UIControlEventTouchUpInside];
+    self.leftButton.enabled=NO;
     [self.view addSubview:self.leftButton];
     //创建右边按钮
     self.rightButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
     self.rightButton.center=CGPointMake((CGRectGetMaxX(self.imageView.frame)+self.view.bounds.size.width)/2, centerY);
     [self.rightButton setImage:[UIImage imageNamed:@"right_normal"] forState:UIControlStateNormal];
     [self.rightButton setImage:[UIImage imageNamed:@"right_highlighted"] forState:UIControlStateHighlighted];
+    [self.rightButton addTarget:self action:@selector(nextPhoto) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.rightButton];
 }
-
+-(void)prePhoto{
+        self.rightButton.enabled=YES;
+        self.index--;
+        self.topLabel.text=[NSString stringWithFormat:@"%d/%d",self.index+1,5];
+        switch (self.index) {
+        case 0:
+            self.imageView.image=[UIImage imageNamed:@"biaoqingdi"];
+            self.detailLabel.text=@"表情帝";
+            break;
+        case 1:
+            self.imageView.image=[UIImage imageNamed:@"bingli"];
+            self.detailLabel.text=@"病历";
+            break;
+        case 2:
+            self.imageView.image=[UIImage imageNamed:@"chiniupa"];
+            self.detailLabel.text=@"吃牛扒";
+            break;
+        case 3:
+            self.imageView.image=[UIImage imageNamed:@"danteng"];
+            self.detailLabel.text=@"蛋疼";
+            break;
+        case 4:
+            self.imageView.image=[UIImage imageNamed:@"wangba"];
+            self.detailLabel.text=@"王八";
+            break;
+        default:break;
+       }
+    if(self.index==0){
+        self.leftButton.enabled=NO;
+    }else{
+        self.leftButton.enabled=YES;
+    }
+}
+-(void)nextPhoto{
+        self.index++;
+        self.leftButton.enabled=YES;
+        self.topLabel.text=[NSString stringWithFormat:@"%d/%d",self.index+1,5];
+        switch (self.index) {
+        case 0:
+            self.imageView.image=[UIImage imageNamed:@"biaoqingdi"];
+            self.detailLabel.text=@"表情帝";
+            break;
+        case 1:
+            self.imageView.image=[UIImage imageNamed:@"bingli"];
+            self.detailLabel.text=@"病历";
+            break;
+        case 2:
+            self.imageView.image=[UIImage imageNamed:@"chiniupa"];
+            self.detailLabel.text=@"吃牛扒";
+            break;
+        case 3:
+            self.imageView.image=[UIImage imageNamed:@"danteng"];
+            self.detailLabel.text=@"蛋疼";
+            break;
+        case 4:
+            self.imageView.image=[UIImage imageNamed:@"wangba"];
+            self.detailLabel.text=@"王八";
+            break;
+        default:
+            break;
+        }
+    if (self.index==4) {
+        self.rightButton.enabled=NO;
+    }else{
+        self.rightButton.enabled=YES;
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
